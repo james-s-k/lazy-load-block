@@ -28,7 +28,7 @@ The Lazy Load Block improves page performance by deferring the loading of block 
 = Block Compatibility =
 
 Fully Compatible:
-* All WordPress core blocks
+* All WordPress core blocks (except for the Row, Stack & Grid blocks)
 * Basic third-party blocks that follow core patterns
 * Static content blocks
 * Media blocks (images, galleries)
@@ -36,9 +36,10 @@ Fully Compatible:
 * Text-based blocks
 
 Limited Compatibility:
+* Row, Stack & Grid blocks
 * Blocks with custom JavaScript initialization
 * Blocks with their own lazy loading
-* Interactive blocks (sliders, counters)
+* Interactive blocks (sliders, counters etc.)
 
 Not Recommended For:
 * Critical above-the-fold content
