@@ -1,0 +1,117 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/css-loader@6.11.0_webpack@5.98.0/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.5.2_webpack@5.98.0/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/.pnpm/sass-loader@12.6.0_sass@1.85.0_webpack@5.98.0/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.lazy-load-block {
+  min-height: 100px;
+  box-sizing: border-box;
+}
+.lazy-load-block .llb-spinner-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease-out;
+  z-index: 10;
+}
+.lazy-load-block .llb-spinner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: llb-spin 0.8s linear infinite;
+}
+.lazy-load-block:not(.block-editor-block-list__block) {
+  position: relative;
+}
+.lazy-load-block:not(.block-editor-block-list__block) > *:not(.llb-spinner-container) {
+  opacity: 0;
+  transition: opacity var(--animation-duration, 300ms) ease-out;
+}
+.lazy-load-block:not(.block-editor-block-list__block).loaded > *:not(.llb-spinner-container) {
+  opacity: 1;
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=fade].loaded {
+  opacity: 1;
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=slide-up] > *:not(.llb-spinner-container) {
+  transform: translateY(50px);
+  transition: opacity var(--animation-duration, 300ms) ease-out, transform var(--animation-duration, 300ms) ease-out;
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=slide-up].loaded > *:not(.llb-spinner-container) {
+  transform: translateY(0);
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=slide-down] > *:not(.llb-spinner-container) {
+  transform: translateY(-50px);
+  transition: opacity var(--animation-duration, 300ms) ease-out, transform var(--animation-duration, 300ms) ease-out;
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=slide-down].loaded > *:not(.llb-spinner-container) {
+  transform: translateY(0);
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=slide-left] > *:not(.llb-spinner-container) {
+  transform: translateX(50px);
+  transition: opacity var(--animation-duration, 300ms) ease-out, transform var(--animation-duration, 300ms) ease-out;
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=slide-left].loaded > *:not(.llb-spinner-container) {
+  transform: translateX(0);
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=slide-right] > *:not(.llb-spinner-container) {
+  transform: translateX(-50px);
+  transition: opacity var(--animation-duration, 300ms) ease-out, transform var(--animation-duration, 300ms) ease-out;
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=slide-right].loaded > *:not(.llb-spinner-container) {
+  transform: translateX(0);
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=scale-up] > *:not(.llb-spinner-container) {
+  transform: scale(0.8);
+  transition: opacity var(--animation-duration, 300ms) ease-out, transform var(--animation-duration, 300ms) ease-out;
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=scale-up].loaded > *:not(.llb-spinner-container) {
+  transform: scale(1);
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=scale-down] > *:not(.llb-spinner-container) {
+  transform: scale(1.2);
+  transition: opacity var(--animation-duration, 300ms) ease-out, transform var(--animation-duration, 300ms) ease-out;
+}
+.lazy-load-block:not(.block-editor-block-list__block)[data-animation=scale-down].loaded > *:not(.llb-spinner-container) {
+  transform: scale(1);
+}
+.lazy-load-block:not(.block-editor-block-list__block).loaded .llb-spinner-container {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes llb-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.lazy-load-block__placeholder {
+  display: none;
+}
+
+.llb-debug-wrapper {
+  font-family: monospace;
+  font-size: 12px !important;
+  margin-top: 1em !important;
+  text-align: center;
+  color: #000;
+}
+.llb-debug-wrapper .llb-debug-trigger {
+  cursor: pointer;
+  opacity: 0.5;
+}
+.llb-debug-wrapper .llb-debug-trigger:hover {
+  opacity: 1;
+}
+.llb-debug-wrapper .llb-debug-content {
+  display: none;
+  margin-top: 0.5em;
+  opacity: 0.7;
+}
+.llb-debug-wrapper:hover .llb-debug-content {
+  display: block;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

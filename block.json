@@ -1,0 +1,107 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "strive/lazy-load-block",
+  "version": "1.0.0",
+  "title": "Lazy Load Block",
+  "category": "widgets",
+  "icon": "clock",
+  "description": "Loads inner blocks with Ajax when they are scrolled into view.",
+  "usesContext": [
+    "textColor",
+    "backgroundColor",
+    "fontSize",
+    "fontFamily"
+  ],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": true,
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "dimensions": {
+      "minHeight": true
+    },
+    "color": {
+      "text": true,
+      "background": true,
+      "gradients": true,
+      "link": true,
+      "__experimentalDefaultControls": {
+        "text": true,
+        "background": true
+      }
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "radius": true,
+        "style": true,
+        "width": true
+      }
+    },
+    "className": true,
+    "inserter": true,
+    "reusable": true,
+    "lock": false,
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "fontStyle": true,
+      "fontWeight": true,
+      "letterSpacing": true,
+      "textTransform": true,
+      "textDecoration": true
+    }
+  },
+  "attributes": {
+    "dataBlockId": {
+      "type": "string"
+    },
+    "animation": {
+      "type": "string",
+      "default": "fade"
+    },
+    "animationDuration": {
+      "type": "number",
+      "default": 500
+    },
+    "spinnerSize": {
+      "type": "number",
+      "default": 40
+    },
+    "spinnerBorderWidth": {
+      "type": "number",
+      "default": 4
+    },
+    "spinnerPrimaryColor": {
+      "type": "string",
+      "default": "#00a8ff"
+    },
+    "spinnerSecondaryColor": {
+      "type": "string",
+      "default": "#cfcfcf"
+    },
+    "showSpinner": {
+      "type": "boolean",
+      "default": true
+    },
+    "loadingOffset": {
+      "type": "number",
+      "default": 100
+    }
+  },
+  "textdomain": "lazy-load-block",
+  "editorScript": "file:./build/index.js",
+  "editorStyle": "file:./build/index.css",
+  "style": "file:./build/style-index.css",
+  "viewScript": "file:./build/frontend.js"
+} 

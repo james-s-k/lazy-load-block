@@ -1,0 +1,76 @@
+.wp-block-strive-lazy-load-block {
+    min-height: 100px;
+    border: 1px dotted #cccccc;
+    box-sizing: border-box;
+}
+
+.wp-block-strive-lazy-load-block > * {
+    display: block;
+}
+
+.wp-block-strive-lazy-load-block.is-vertical .block-list-appender {
+    width: auto;
+}
+
+// Ensure block toolbar is visible
+.block-editor-block-toolbar {
+    z-index: 29;
+}
+
+.llb-color-control {
+    margin-bottom: 16px;
+    
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
+}
+
+.llb-spinner-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #f0f0f0;
+    border-radius: 4px;
+
+    .llb-spinner-container {
+        position: relative;
+        margin-bottom: 8px;
+        cursor: pointer;
+    }
+
+    .llb-spinner {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-sizing: border-box;
+        animation: none;
+        transition: transform 0.1s ease-out;
+    }
+
+    .llb-spinner-container:hover .llb-spinner {
+        animation: llb-spin 0.8s linear infinite;
+    }
+
+    .llb-spinner-label {
+        font-size: 12px;
+        color: #757575;
+    }
+}
+
+@keyframes llb-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.llb-empty-message {
+    width: 100%;
+    text-align: center;
+    color: #757575;
+    font-style: italic;
+    padding: 1em;
+    margin: 0;
+    cursor: pointer;
+} 

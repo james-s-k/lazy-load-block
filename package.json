@@ -1,0 +1,21 @@
+{
+    "name": "lazy-load-block",
+    "version": "1.0.0",
+    "description": "A block that lazy loads its inner content on scroll",
+    "scripts": {
+        "build": "wp-scripts build src/index.js src/frontend.js",
+        "start": "wp-scripts start src/index.js src/frontend.js"
+    },
+    "dependencies": {
+        "@wordpress/blocks": "^12.12.0",
+        "@wordpress/block-editor": "^12.12.0",
+        "@wordpress/element": "^5.12.0",
+        "@wordpress/browserslist-config": "^5.30.0"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "^26.13.0"
+    },
+    "browserslist": [
+        "extends @wordpress/browserslist-config"
+    ]
+}
