@@ -355,7 +355,8 @@ function lazy_load_block_ajax_handler() {
     // Render inner blocks
     $content = '';
     foreach ($target_block['innerBlocks'] as $inner_block) {
-        $content .= render_block($inner_block);
+        // $content .= render_block( $inner_block );
+		$content .= lazy_load_block_render_layout_support_flag( render_block( $inner_block ), $inner_block );
     }
     mark_time('blocks_rendered');
 
@@ -488,3 +489,79 @@ function get_block_location($block_id) {
     // Fallback to template type if no specific location was found
     return 'Unknown Location';
 } 
+
+
+/**
+ * Renders the layout support flag for the block.
+ *
+ * @param  string $block_content The content of the block.
+ * @param  array  $block The block.
+ * @return string The content of the block with the layout support flag.
+ */
+function lazy_load_block_render_layout_support_flag( $block_content, $block ) {
+	// Skip if no block name is provided
+	if ( empty( $block['blockName'] ) ) {
+		return $block_content;
+	}
+
+	$block_type = WP_Block_Type_Registry::get_instance()->get_registered( $block['blockName'] );
+
+	// Return early if block type is not found
+	if ( ! $block_type ) {
+		return $block_content;
+	}
+
+	// Check if block has layout support.
+	$support_layout = block_has_support( $block_type, array( 'layout' ), false ) || block_has_support( $block_type, array( '__experimentalLayout' ), false );
+
+	if ( ! $support_layout ) {
+		return $block_content;
+	}
+
+	$block_gap             = wp_get_global_settings( array( 'spacing', 'blockGap' ) );
+	$default_layout        = wp_get_global_settings( array( 'layout' ) );
+	$has_block_gap_support = isset( $block_gap ) ? null !== $block_gap : false;
+	$default_block_layout  = _wp_array_get( $block_type->supports, array( '__experimentalLayout', 'default' ), array() );
+	$used_layout           = isset( $block['attrs']['layout'] ) ? $block['attrs']['layout'] : $default_block_layout;
+	if ( isset( $used_layout['inherit'] ) && $used_layout['inherit'] ) {
+		if ( ! $default_layout ) {
+			return $block_content;
+		}
+		$used_layout = $default_layout;
+	}
+
+	$class_name = wp_unique_id( 'wp-container-' );
+	$gap_value  = _wp_array_get( $block, array( 'attrs', 'style', 'spacing', 'blockGap' ) );
+	// Skip if gap value contains unsupported characters.
+	// Regex for CSS value borrowed from `safecss_filter_attr`, and used here
+	// because we only want to match against the value, not the CSS attribute.
+	if ( is_array( $gap_value ) ) {
+		foreach ( $gap_value as $key => $value ) {
+			$gap_value[ $key ] = $value && preg_match( '%[\\\(&=}]|/\*%', $value ) ? null : $value;
+		}
+	} else {
+		$gap_value = $gap_value && preg_match( '%[\\\(&=}]|/\*%', $gap_value ) ? null : $gap_value;
+	}
+
+	$fallback_gap_value = _wp_array_get( $block_type->supports, array( 'spacing', 'blockGap', '__experimentalDefault' ), '0.5em' );
+
+	// If a block's block.json skips serialization for spacing or spacing.blockGap,
+	// don't apply the user-defined value to the styles.
+	$should_skip_gap_serialization = wp_should_skip_block_supports_serialization( $block_type, 'spacing', 'blockGap' );
+	$style                         = wp_get_layout_style( ".$class_name", $used_layout, $has_block_gap_support, $gap_value, $should_skip_gap_serialization, $fallback_gap_value );
+	// This assumes the hook only applies to blocks with a single wrapper.
+	// I think this is a reasonable limitation for that particular hook.
+	$content = preg_replace(
+		'/' . preg_quote( 'class="', '/' ) . '/',
+		'class="' . esc_attr( $class_name ) . ' ',
+		$block_content,
+		1
+	);
+
+	// This is where the changes happen
+    if(! empty($style)) {
+	    return '<style>' . $style . '</style>' . $content;
+    }
+
+    return $content;
+}
